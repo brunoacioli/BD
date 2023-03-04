@@ -33,9 +33,13 @@ Identify the entities, attributes, and relationships of the database.
     PK: Codigo
     FK(s): CondPag_Codigo, TipoForn_Codigo
 
-    Encomenda (NumEnc, Data, Forn_Codigo, Prod_Codigo, unidades)
+    Encomenda (NumEnc, Data, Forn_Codigo, Enc_Prod_Codigo, unidades)
     PK: NumEnc
     FK(s): Forn_Codigo, Prod_Codigo
+
+    Enc_Prod (Codigo, NumEnc, Cod_Prod, unidades_prod)
+    PK: Codigo
+    FK(s): NumEnc, Cod_Prod
 
     
 
@@ -45,13 +49,21 @@ Identify the entities, attributes, and relationships of the database.
 Specify the relationships regarding the degree, cardinality and instances mandatory participation of the entities in the relationship.
 
 ```
-... Write here your answer ...
+Grau: Todas as relações sao binárias
+
+Cardinalidade está na imagem
+
+Obrigatoriade:
+    Encomenda é obrigada a ter um ou mais produtos.
+    Encomenda é obrigada a ter um fornecedor
+    Fornecedor é obrigado a ter uma ou mais condições de pagamento
+    Fornecedor é obrigado a ter um tipo de fornecedor
 
 ```
 
 #### *c)* Desenvolva o desenho conceptual da base de dados com recurso a um diagrama entidade-relacionamento. Numa primeira fase, utilize lápis e papel para realizar o trabalho. Uma vez concluído o desenho em papel, transponha o diagrama para um formato eletrónico utilizando uma ferramenta gráfica como, por exemplo, o Microsoft Visio ou o Visual Paradigm.
 
-![ex_2_1!](ex_2_1.png "AnImage or PDF file")
+![q1c!](q1c.jpeg "AnImage or PDF file")
 
 ### Problema *2.2*
 
@@ -68,7 +80,7 @@ Considere um Sistema de Prescrição Eletrónica de Medicamentos com as seguinte
 
 #### *a)* Desenvolva o desenho conceptual da base de dados do Sistema de Prescrição Eletrónica de Medicamentos com recurso a um diagrama entidade-relacionamento.
 
-![ex_2_2!](ex_2_2.png "AnImage or PDF file")
+![q2a!](q2a.jpeg "AnImage or PDF file")
 
 ### Problema 2.3
 
@@ -85,7 +97,7 @@ Considere um Sistema de Gestão de Conferências com as seguintes característic
 
 #### *a)* Desenvolva o desenho conceptual da base de dados do Sistema de Gestão de Conferências com recurso a um diagrama entidade-relascionamento.
 
-![ex_2_3!](ex_2_3.png "AnImage or PDF file")
+![q3a!](q3a.jpeg "AnImage or PDF file")
 
 ### Problema 2.4
 
@@ -100,7 +112,7 @@ Considere um Sistema de Gestão de um ATL com as seguintes características:
 
 #### *a)* Desenvolva o desenho conceptual da base de dados do Sistema de Informação da Universidade com recurso a um diagrama entidade-relacionamento.
 
-![ex_2_4a!](ex_2_4a.png "AnImage or PDF file")
+![q4a!](q4a.jpeg "AnImage or PDF file")
 
 ### *b)* [Opcional] Continue a modelar o problema de forma a registar os processos financeiros (mensalidades, atividades, pagamentos, desconto família, etc). Defina os requisitos livremente.
 
