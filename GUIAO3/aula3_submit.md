@@ -58,7 +58,7 @@ PK: Código_tipo1, Código_tipo2
 
 ### *c)* 
 
-![ex_3_1c!](ex_3_1c.jpg "AnImage")
+![q1c!](q1c.jpeg "AnImage")
 
 
 ## ​Problema 3.2
@@ -76,6 +76,11 @@ Candidate: Type_Name
 PK: Type_Name
 FK:
 
+Airport_Airplane_Type: (Id, Airport_code, Airport_Type_Name)
+Candidate: Id,
+PK: Id
+FK: Airport_Code, Airport_Type_Name
+
 Airplane: (Airplane_id, Total_no_of_seats, Airplane_Type_Name)
 Candidate: Airplane_id
 PK: Airplane_id
@@ -83,28 +88,28 @@ FK: Airplane_Type_Name
 
 Leg_Instance: Date, No_of_avail_seats, Leg_no,Airport_Code_Arrival, Airport_Code_Departure, Flight_Number, Airplane_id
 Candidates: Date, Leg_no,Airport_Code_Arrival, Airport_Code_Departure, Flight_Number, Airplane_id
-PK:
-FK:
+PK: Date, Leg_no,Airport_Code_Arrival, Airport_Code_Departure, Flight_Number, Airplane_id
+FK: Leg_no,Airport_Code_Arrival, Airport_Code_Departure, Flight_Number, Airplane_id
 
-Seat: Seat_no
-Candidate:
-PK:
-FK:
+Seat: Seat_no, Date, Leg_no,Airport_Code_Arrival, Airport_Code_Departure, Flight_Number, Airplane_id
+Candidate: Seat_no, Date, Leg_no,Airport_Code_Arrival, Airport_Code_Departure, Flight_Number, Airplane_id
+PK: Seat_no, Date, Leg_no,Airport_Code_Arrival, Airport_Code_Departure, Flight_Number, Airplane_id
+FK: Date, Leg_no,Airport_Code_Arrival, Airport_Code_Departure, Flight_Number, Airplane_id 
 
 Flight_leg: Leg_no,Airport_Code_Arrival, Airport_Code_Departure, Flight_Number
 Candidate: Leg_no,Airport_Code_Arrival, Airport_Code_Departure, Flight_Number
 PK: Leg_no,Airport_Code_Arrival, Airport_Code_Departure, Flight_Number
 FK: Airport_Code_Arrival, Airport_Code_Departure, Flight_Number
 
-Flight: (Number, Airline, Weekdays, Fare_Code)
+Flight: (Number, Airline, Weekday)
 Candidate: Number
 PK: Number
-FK: Fare_Code
+FK:
 
-Fare: (Code, Restrictions, Amount)
+Fare: (Code, Restrictions, Amount, Flight_Number)
 Candiidate: Code
 PK: Code
-FK:
+FK: Flight_Number
 ```
 
 
@@ -125,11 +130,11 @@ FK:
 
 ### *a)* 2.1
 
-![ex_3_3_a!](ex_3_3a.jpg "AnImage")
+![q3_1!](q3_1.jpg "AnImage")
 
 ### *b)* 2.2
 
-![ex_3_3_b!](ex_3_3b.jpg "AnImage")
+![q3_2!](q3_2.jpg "AnImage")
 
 ### *c)* 2.3
 
