@@ -122,7 +122,7 @@ FK: Flight_Number
 
 ### *c)* 
 
-![ex_3_2c!](ex_3_2c.jpg "AnImage")
+![ex_3_2c!](q2.jpg "AnImage")
 
 
 ## ​Problema 3.3
@@ -138,8 +138,8 @@ FK: Flight_Number
 
 ### *c)* 2.3
 
-![ex_3_3_c!](ex_3_3c.jpg "AnImage")
+![ex_3_3_c!](q3_3.jpg "AnImage")
 
 ### *d)* 2.4
 
-![ex_3_3_d!](ex_3_3d.jpg "AnImage")
+![ex_3_3_d!](q3_4.jpg "AnImage")
