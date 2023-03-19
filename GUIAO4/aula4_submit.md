@@ -15,7 +15,7 @@
 ![ex_4_1_2 diagram](ex_4_1_2.png "AnImage")
 
 ### 3. Sistema de Gestão de Stocks – Módulo de Encomendas
-
+X		
 [SQL DDL File](ex_4_1_3.sql "SQLFileQuestion")
 
 ![ex_4_1_3 diagram](ex_4_1_3.png "AnImage")
