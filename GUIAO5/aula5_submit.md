@@ -28,42 +28,42 @@ Write here your answer e.g:
 ### *d)* 
 
 ```
-... Write here your answer ...
+π Fname, Minit, Lname, Pname, Dno, Hours (σ (Pname='Aveiro Digital' ∧ Dnum = 3 ∧ Hours > 20) ((project) ⨝ Pnumber = Pno (employee ⨝ Ssn = Essn works_on)))
 ```
 
 
 ### *e)* 
 
 ```
-... Write here your answer ...
+π Fname, Minit, Lname (σ Pno=null (employee⟕Ssn=Essn works_on))
 ```
 
 
 ### *f)* 
 
 ```
-... Write here your answer ...
+γ Dname;Average_Women_Salary←avg(employee.Salary) (department⨝ Dnumber=Dno σSex='F' (employee))
 ```
 
 
 ### *g)* 
 
 ```
-... Write here your answer ...
+σ nDependentes > 2 (γ Fname, Minit, Lname ; nDependentes←count(Essn) (employee ⨝ Ssn = Essn dependent))
 ```
 
 
 ### *h)* 
 
 ```
-... Write here your answer ...
+πFname,Lname (σMgr_ssn ≠ Essn (employee ⨝ Ssn = Mgr_ssn department ⟕ Mgr_ssn = Essn dependent))
 ```
 
 
 ### *i)* 
 
 ```
-... Write here your answer ...
+π Fname, Minit, Lname, Address ((employee⨝Ssn=Essn works_on⨝Pno=Pnumber (σ Plocation='Aveiro' project))⨝Dno=Dnumber  (σ Dlocation!='Aveiro' (department⟕dept_location)))
 ```
 
 
@@ -72,27 +72,28 @@ Write here your answer e.g:
 ### *a)*
 
 ```
-... Write here your answer ...
+πnome,nif,fax,endereco,condpag,tipo (σfornecedor=null (encomenda⟗fornecedor=nif (fornecedor)))
 ```
 
 ### *b)* 
 
 ```
-... Write here your answer ...
+π nome, codProd, avgUnidades (produto ⨝ codigo = item.codProd ( γ codProd; avgUnidades←avg(item.unidades) (item) ))
 ```
 
 
 ### *c)* 
 
 ```
-... Write here your answer ...
+γ;nprod_avg←avg(nprodutos) (γnumEnc;nprodutos←count(codProd) (item))
 ```
 
 
 ### *d)* 
 
 ```
-... Write here your answer ...
+πproduto.codigo,nif,fornecedor.nome,qtd_total ((γcodProd,fornecedor;qtd_total←sum(item.unidades) (item⨝numEnc = numero encomenda))⨝ fornecedor=nif fornecedor ⨝ codProd = codigo produto)
+
 ```
 
 
@@ -101,37 +102,40 @@ Write here your answer e.g:
 ### *a)*
 
 ```
-... Write here your answer ...
+π paciente.nome, paciente.numUtente (σ prescricao.numUtente = null ( (paciente) ⟕ paciente.numUtente = prescricao.numUtente (prescricao))
+) 
 ```
 
 ### *b)* 
 
 ```
-... Write here your answer ...
+γ medico.especialidade; numPresc←count(numPresc) (medico ⨝ numSNS=numMedico prescricao)
+
 ```
 
 
 ### *c)* 
 
 ```
-... Write here your answer ...
+γfarmacia;PrescrPorFarm←count(farmacia) (prescricao ⨝ farmacia = nome farmacia)
 ```
 
 
 ### *d)* 
 
 ```
-... Write here your answer ...
+πnumRegFarm,nome,formula (σnumRegFarm= 906 ∧ numPresc = null (farmaco ⟕ (farmaco ⟕ nome = nomeFarmaco presc_farmaco)))
 ```
 
 ### *e)* 
 
 ```
-... Write here your answer ...
+γ farmacia.nome, numRegFarm; farmacosVendidos←count(prescricao.numPresc) (presc_farmaco ⨝ presc_farmaco.numPresc = prescricao.numPresc ((prescricao) ⨝ farmacia = nome (farmacia)))
 ```
 
 ### *f)* 
 
 ```
-... Write here your answer ...
+paciente ⨝ π numUtente σ numMedicos > 1 (γ numUtente; numMedicos←count(numMedico) (π numUtente, numMedico prescricao))
+
 ```
