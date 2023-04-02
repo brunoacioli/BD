@@ -198,55 +198,104 @@ SELECT titles.title from titles where titles.title_id NOT IN
 ##### *a)*
 
 ```
-... Write here your answer ...
+SELECT Fname, Minit, Lname, Company_Employee.Ssn
+FROM Company_Employee
+JOIN Company_Works_on ON Company_Employee.Ssn = Company_Works_on.Essn
+JOIN Company_Project ON Company_Works_on.Pno = Company_Project.Pnumber;
 ```
 
 ##### *b)* 
 
 ```
-... Write here your answer ...
+SELECT Fname, Lname, Ssn
+FROM Company_Employee
+INNER JOIN
+  (SELECT Ssn
+   FROM Company_Employee
+   WHERE Fname = 'Carlos' AND Lname = 'Gomes') AS supervisor
+ON Company_Employee.Super_ssn = supervisor.Ssn;
+
 ```
 
 ##### *c)* 
 
 ```
-... Write here your answer ...
+SELECT Pname, SUM(Company_Works_on.Hours) AS TotalHours 
+FROM Company_Project JOIN Company_Works_on 
+ON Company_Project.Pnumber = Company_Works_on.Pno GROUP BY Pname
+
 ```
 
 ##### *d)* 
 
 ```
-... Write here your answer ...
+SELECT Company_Employee.Fname, Company_Employee.Minit, Company_Employee.Lname, Company_Project.Pname, Company_Works_on.Dno, Company_Works_on.Hours
+FROM Company_Employee 
+JOIN Company_Works_on ON Company_Employee.Ssn = Company_Works_on.Essn 
+JOIN Company_Project ON Company_Works_on.Pno = Company_Project.Pnumber 
+WHERE Company_Project.Pname = 'Aveiro Digital' AND Company_Works_on.Dno = 3 AND Company_Works_on.Hours > 20;
+
 ```
 
 ##### *e)* 
 
 ```
-... Write here your answer ...
+SELECT DISTINCT Fname, Minit, Lname 
+FROM Company_Employee 
+WHERE Ssn NOT IN (SELECT Essn FROM works_on WHERE Pno IS NOT NULL);
 ```
 
 ##### *f)* 
 
 ```
-... Write here your answer ...
+SELECT Company_Department.Dname, AVG(Company_Employee.Salary) AS Average_Women_Salary 
+FROM Company_Department 
+    JOIN Company_Employee 
+        ON Company_Department.Dnumber = Company_Employee.Dno 
+WHERE Company_Employee.Sex = 'F' 
+GROUP BY Company_Department.Dname;
+
 ```
 
 ##### *g)* 
 
 ```
-... Write here your answer ...
+SELECT Fname, Minit, Lname, COUNT(Company_Dependent.Essn) AS nDependentes 
+FROM Company_Employee 
+    JOIN Company_Dependent 
+        ON Company_Employee.Ssn = Company_Dependent.Essn 
+GROUP BY Company_Employee.Ssn 
+HAVING COUNT(Company_Dependent.Essn) > 2;
+
 ```
 
 ##### *h)* 
 
 ```
-... Write here your answer ...
+SELECT DISTINCT Company_Employee.Fname, Company_Employee.Lname 
+FROM Company_Employee 
+    JOIN Company_Department 
+        ON Company_Employee.Ssn = Company_Department.Mgr_ssn 
+    JOIN Company_Dependent 
+        ON Company_Department.Mgr_ssn = Company_Dependent.Essn 
+WHERE Company_Employee.Ssn <> Company_Dependent.Essn;
+
 ```
 
 ##### *i)* 
 
 ```
-... Write here your answer ...
+SELECT Company_Employee.Fname, Company_Employee.Minit, Company_Employee.Lname, Company_Employee.Address 
+FROM Company_Employee 
+    JOIN Company_Works_on 
+        ON Company_Employee.Ssn = Company_Works_on.Essn 
+    JOIN Company_Project 
+        ON Company_Works_on.Pno = Company_Project.Pnumber 
+        AND Company_Project.Plocation = 'Aveiro'
+    JOIN Company_Department 
+        ON Company_Project.Dno = Company_Department.Dnumber 
+        AND Company_Department.Dlocation != 'Aveiro';
+
 ```
 
 ### 5.2
@@ -264,27 +313,47 @@ SELECT titles.title from titles where titles.title_id NOT IN
 ##### *a)*
 
 ```
-... Write here your answer ...
+SELECT nome, nif, fax, endereco, condpag, tipo
+FROM fornecedor
+INNER JOIN encomenda ON encomenda.fornecedor = fornecedor.nif
+WHERE fornecedor.nif IS NULL
 ```
 
 ##### *b)* 
 
 ```
-... Write here your answer ...
+SELECT produto.nome, AVG(item.unidades) as average FROM produto INNER JOIN item ON produto.codigo = item.codProd
+INNER JOIN encomenda ON item.numEnc = encomenda.numero
+GROUP BY produto.nome
 ```
 
 
 ##### *c)* 
 
 ```
-... Write here your answer ...
+SELECT numEnc, AVG(nprodutos) AS nprod_avg
+FROM (
+  SELECT numEnc, COUNT(codProd) AS nprodutos
+  FROM item
+  GROUP BY numEnc
+) AS subquery
+GROUP BY numEnc
 ```
 
 
 ##### *d)* 
 
 ```
-... Write here your answer ...
+SELECT produto.codigo, fornecedor.nif, fornecedor.nome, SUM(item.unidades) AS qtd_total
+FROM item
+INNER JOIN produto
+ON item.codProd = produto.codigo
+INNER JOIN encomenda
+ON item.numEnc = encomenda.numero
+INNER JOIN fornecedor
+ON encomenda.fornecedor = fornecedor.nif
+WHERE fornecedor.nif = fornecedor.nif AND produto.codigo = produto.codigo
+GROUP BY produto.codigo, fornecedor.nif, fornecedor.nome
 ```
 
 ### 5.3
@@ -302,27 +371,38 @@ SELECT titles.title from titles where titles.title_id NOT IN
 ##### *a)*
 
 ```
-... Write here your answer ...
+SELECT nome, num_utente
+FROM PrescricaoMed_Paciente
+LEFT JOIN PrescricaoMed_Prescricao ON PrescricaoMed_Paciente.num_utente = PrescricaoMed_Prescricao.num_utente
+WHERE PrescricaoMed_Prescricao.num_utente IS NULL;
 ```
 
 ##### *b)* 
 
 ```
-... Write here your answer ...
+SELECT especialidade, COUNT(PrescricaoMed_Prescricao.numero_unico) AS numPresc
+FROM PrescricaoMed_Medico
+INNER JOIN PrescricaoMed_Prescricao ON PrescricaoMed_Medico.num_id = PrescricaoMed_Prescricao.num_medico
+GROUP BY PrescricaoMed_Medico.especialidade;
 ```
 
 
 ##### *c)* 
 
 ```
-... Write here your answer ...
+SELECT nif_farmacia, COUNT(*) AS PrescrPorFarm 
+FROM PrescricaoMed_Prescricao 
+    JOIN farmacia 
+        ON PrescricaoMed_Prescricao.nif_farmacia = PrescricaoMed_Farmacia.nif 
+GROUP BY nif_farmacia;
+
 ```
 
 
 ##### *d)* 
 
 ```
-... Write here your answer ...
+
 ```
 
 ##### *e)* 
