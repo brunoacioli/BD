@@ -7,7 +7,7 @@
 
 ```
 Write here your answer e.g:
-(π Pname, Pnumber (project) ⨝ Pno=Pnumber (works_on)) ⨝.... 
+(π Pname, Pnumber (project) ⨝ Pno=Pnumber (works_on)) ⨝.
 ```
 
 
