@@ -22,3 +22,4 @@ C:\BD\GUIAO1\bin\Debug\net6.0-windows\runtimes\win-x86\native\sni.dll
 C:\BD\GUIAO1\bin\Debug\net6.0-windows\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
 C:\BD\GUIAO1\bin\Debug\net6.0-windows\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
 C:\BD\GUIAO1\obj\Debug\net6.0-windows\GUIAO1.csproj.CopyComplete
+C:\BD\GUIAO1\obj\Debug\net6.0-windows\GUIAO1.ListClients.resources
