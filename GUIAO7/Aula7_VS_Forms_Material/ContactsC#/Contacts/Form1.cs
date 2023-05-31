@@ -390,8 +390,14 @@ namespace Contacts
             Application.Exit();
         }
 
-  
+        private void txtID_TextChanged(object sender, EventArgs e)
+        {
 
+        }
 
+        private void txtCompany_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

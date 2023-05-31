@@ -34,111 +34,45 @@ namespace GUIAO1
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.button2 = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.SuspendLayout();
+            button1 = new Button();
+            button2 = new Button();
+            SuspendLayout();
             // 
             // button1
             // 
-            this.button1.ForeColor = System.Drawing.Color.Black;
-            this.button1.Location = new System.Drawing.Point(240, 289);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(109, 67);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Test Ligaçao";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(240, 74);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(286, 27);
-            this.textBox1.TabIndex = 1;
-            this.textBox1.Text = "tcp:mednat.ieeta.pt\\SQLSERVER,8101";
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(240, 147);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(286, 27);
-            this.textBox2.TabIndex = 2;
-            this.textBox2.Text = "p10g2";
-            // 
-            // textBox3
-            // 
-            this.textBox3.Location = new System.Drawing.Point(240, 218);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.PasswordChar = '*';
-            this.textBox3.Size = new System.Drawing.Size(286, 27);
-            this.textBox3.TabIndex = 3;
-            this.textBox3.Text = "@Osmarfrango1";
+            button1.ForeColor = Color.Black;
+            button1.Location = new Point(98, 115);
+            button1.Margin = new Padding(3, 2, 3, 2);
+            button1.Name = "button1";
+            button1.Size = new Size(179, 50);
+            button1.TabIndex = 0;
+            button1.Text = "Motorista";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(420, 289);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(106, 67);
-            this.button2.TabIndex = 4;
-            this.button2.Text = "Hello Table";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(136, 77);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(50, 20);
-            this.label1.TabIndex = 5;
-            this.label1.Text = "Server";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(136, 147);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(38, 20);
-            this.label2.TabIndex = 6;
-            this.label2.Text = "User";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(136, 221);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(70, 20);
-            this.label3.TabIndex = 7;
-            this.label3.Text = "Password";
+            button2.Location = new Point(410, 115);
+            button2.Margin = new Padding(3, 2, 3, 2);
+            button2.Name = "button2";
+            button2.Size = new Size(192, 50);
+            button2.TabIndex = 4;
+            button2.Text = "Cliente";
+            button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.button1);
-            this.Name = "Form1";
-            this.Text = "Aula 1 BD";
-            this.Load += new System.EventHandler(this.Form1_Load);
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(700, 338);
+            Controls.Add(button2);
+            Controls.Add(button1);
+            Margin = new Padding(3, 2, 3, 2);
+            Name = "Form1";
+            Text = "Aula 1 BD";
+            Load += Form1_Load;
+            ResumeLayout(false);
         }
 
         #endregion
@@ -175,14 +109,25 @@ namespace GUIAO1
                 if (CN.State == ConnectionState.Open)
                 {
                     int cnt = 1;
-                    SqlCommand sqlcmd = new SqlCommand("SELECT * FROM Hello", CN);
+                    SqlCommand sqlcmd = new SqlCommand("SELECT * FROM Pessoas", CN);
                     SqlDataReader reader;
                     reader = sqlcmd.ExecuteReader();
 
                     while (reader.Read())
                     {
-                        str += cnt.ToString() + " - " + reader.GetInt32(reader.GetOrdinal("MsgID")) + ", ";
-                        str += reader.GetString(reader.GetOrdinal("MsgSubject"));
+                        str += cnt.ToString() + " - " + reader.GetInt32(reader.GetOrdinal("id")) + ", ";
+                        str += reader.GetString(reader.GetOrdinal("nome")) + ", ";
+                        str += reader.GetString(reader.GetOrdinal("email")) + ", ";
+                        str += reader.GetString(reader.GetOrdinal("foto")) + ", ";
+                        str += reader.GetInt32(reader.GetOrdinal("avaliacao")) + ", ";
+                        str += reader.GetInt32(reader.GetOrdinal("telefone")) + ", ";
+
+                        int cartaConducaoOrdinal = reader.GetOrdinal("carta_conducao");
+                        if (!reader.IsDBNull(cartaConducaoOrdinal))
+                        {
+                            str += reader.GetString(reader.GetOrdinal("carta_conducao")) + ", ";
+
+                        }
                         str += "\n";
                         cnt += 1;
                     }
@@ -197,14 +142,53 @@ namespace GUIAO1
                 CN.Close();
             return str;
         }
-        private string getConnection(string dbServer, string dbName, string userName, string userPass)
+
+        private List<Motorista> getMotoristasContent(SqlConnection CN)
         {
-            SqlConnection CN = new SqlConnection("Data Source = " + dbServer + " ;" + "Initial Catalog = " + dbName +
-                                                       "; uid = " + userName + ";" + "password = " + userPass);
+            List<Motorista> motoraList = new List<Motorista>();
 
-            string str = getTableContent(CN);
+            try
+            {
+                CN.Open();
+                if (CN.State == ConnectionState.Open)
+                {
+                    
+                    SqlCommand sqlcmd = new SqlCommand("SELECT * FROM Pessoas WHERE carta_conducao IS NOT NULL", CN);
+                    SqlDataReader reader;
+                    reader = sqlcmd.ExecuteReader();
+                    
+                    while (reader.Read())
+                    {
+                        Motorista M = new Motorista();
+                        M.MotoristaID = reader.GetInt32(reader.GetOrdinal("id")).ToString();
+                        M.MotoristaNome = reader.GetString(reader.GetOrdinal("nome")) ;
+                        M.MotoristaEmail = reader.GetString(reader.GetOrdinal("email"));
+                        M.MotoristaFoto = reader.GetString(reader.GetOrdinal("foto"));
+                        M.MotoristaAvaliacao = reader.GetDouble(reader.GetOrdinal("avaliacao")).ToString();
+                        M.MotoristaTelefone = reader.GetInt32(reader.GetOrdinal("telefone")).ToString();
+                        M.MotoristaCartaConducao = reader.GetString(reader.GetOrdinal("carta_conducao"));
+                        motoraList.Add(M);
+                        
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Failed to open connection to database due to the error \r\n" + ex.Message, "Connection Error", MessageBoxButtons.OK);
+            }
 
-            return str;
+            if (CN.State == ConnectionState.Open)
+                CN.Close();
+            return motoraList;
+        }
+        
+
+        private SqlConnection getConnection()
+        {
+            SqlConnection CN = new SqlConnection("Data Source = " + "tcp:mednat.ieeta.pt\\SQLSERVER,8101" + " ;" + "Initial Catalog = " + "p10g2" +
+                                                       "; uid = " + "p10g2" + ";" + "password = " + "@Osmarfrango1");
+
+            return CN;
         }
 
         private Button button1;

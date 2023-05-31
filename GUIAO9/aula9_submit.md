@@ -116,4 +116,120 @@ AS
     END
 
 ```
+### *g)*
+```
+CREATE PROC Project_budget_byDept @DeptNumInput SMALLINT
+AS
+	
+	DECLARE @totalBudget as FLOAT, @orcamento as FLOAT, @projname as VARCHAR(10), @pNumber AS SMALLINT, @ploc AS VARCHAR(15),
+	@empSsn as INT, @Esalary as FLOAT, @Deptnum as SMALLINT, @totalhours as INT, @hours as INT, @Ppresent as INT, @Ppast as INT,
+	@ProjnamePast as VARCHAR(16), @plocPast as VARCHAR(16);
 
+	CREATE TABLE #Results(
+			pname	VARCHAR(16),
+			pnumber SMALLINT,
+			plocation VARCHAR(16),
+			dnum	SMALLINT,
+			budget FLOAT,
+			totalbudget FLOAT
+	);
+
+	DECLARE C CURSOR FAST_FORWARD
+	FOR SELECT Ssn, Salary, Hours,Pno,Pname,Plocation,Dnum
+	From employee JOIN
+	(SELECT	Essn,works_on.Hours,Pname,Pno,Plocation,Pnumber,Dnum
+	FROM	works_on JOIN
+						(SELECT Pname, Pnumber,Plocation,Dnum
+						FROM project
+						WHERE Dnum = @DeptNumInput) AS proj ON proj.Pnumber = Pno) AS employeeHours ON Ssn = employeeHours.Essn
+						ORDER BY Pno ASC;
+
+	OPEN C;
+
+	FETCH C INTO @empssn,@Esalary,@hours,@pNumber,@projname,@ploc,@Deptnum;
+
+	SELECT @Ppast = @pNumber  ,@totalBudget = 0, @totalhours = 0, @orcamento = 0;
+
+	WHILE @@FETCH_STATUS =0
+		BEGIN
+			if @Ppast = @pNumber
+				BEGIN 
+					PRINT '1 if ' + CAST(@pNumber as VARCHAR);
+					SET @totalBudget += @Esalary;
+					SET @orcamento += (@hours*@Esalary)/40;
+					SET @ProjnamePast = @projname;
+					SET @plocPast = @ploc;
+
+
+				END
+
+			else
+				BEGIN
+					INSERT INTO #Results(pname, pnumber, plocation, dnum, budget, totalbudget)
+					VALUES (@ProjnamePast, @Ppast, @plocPast, @Deptnum, @orcamento, @totalBudget);
+					SELECT @totalBudget = 0, @orcamento = 0,@Ppast = @pNumber;
+					SET @totalBudget += @Esalary;
+					SET @orcamento += (@hours*@Esalary)/40;
+
+					if (SELECT COUNT(Pno) FROM works_on WHERE Pno = @pNumber ) = 1
+						BEGIN
+							INSERT INTO #Results(pname, pnumber, plocation, dnum, budget, totalbudget)
+							VALUES (@projname, @pNumber, @ploc, @Deptnum, @orcamento, @totalBudget);
+							SELECT @totalBudget = 0, @orcamento = 0,@Ppast = @pNumber;
+						END
+
+				END
+
+				PRINT CAST(@totalBudget as VARCHAR) + '-' + CAST(@orcamento as VARCHAR);
+			FETCH  C INTO @empssn,@Esalary,@hours,@pNumber,@projname,@ploc,@Deptnum;
+		END;
+
+	CLOSE C;
+
+	DEALLOCATE C;
+```
+### *h)*
+```
+CREATE TRIGGER delete_Depart_After ON department
+AFTER DELETE
+AS 
+BEGIN
+    IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = 'department_deleted')
+    BEGIN
+        CREATE TABLE department_deleted (
+            Dname VARCHAR(64),
+            Dnumber INT PRIMARY KEY,
+            Msgr_start_date DATE,
+            Mgr_ssn INT,
+            FOREIGN KEY (Mgr_ssn) REFERENCES employee(Ssn)
+        );
+    END;
+
+    INSERT INTO department_deleted (Dname, Dnumber, Msgr_start_date, Mgr_ssn)
+    SELECT Dname, Dnumber, Mgr_start_date, Mgr_ssn
+    FROM deleted;
+END;
+
+
+CREATE TRIGGER delete_Depart_Instead ON department
+INSTEAD OF DELETE
+AS 
+BEGIN
+    IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = 'department_deleted')
+    BEGIN
+        CREATE TABLE department_deleted (
+            Dname VARCHAR(64),
+            Dnumber INT PRIMARY KEY,
+            Msgr_start_date DATE,
+            Mgr_ssn INT,
+            FOREIGN KEY (Mgr_ssn) REFERENCES employee(Ssn)
+        );
+    END;
+
+    INSERT INTO department_deleted (Dname, Dnumber, Msgr_start_date, Mgr_ssn)
+    SELECT Dname, Dnumber, Mgr_start_date, Mgr_ssn
+    FROM deleted;
+END;
+
+
+```

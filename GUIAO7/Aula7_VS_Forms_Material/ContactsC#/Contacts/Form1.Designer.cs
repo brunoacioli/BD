@@ -61,8 +61,8 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadCustomersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -160,6 +160,7 @@
             this.txtID.ReadOnly = true;
             this.txtID.Size = new System.Drawing.Size(69, 22);
             this.txtID.TabIndex = 140;
+            this.txtID.TextChanged += new System.EventHandler(this.txtID_TextChanged);
             // 
             // Label11
             // 
@@ -414,12 +415,13 @@
             this.txtCompany.ReadOnly = true;
             this.txtCompany.Size = new System.Drawing.Size(268, 22);
             this.txtCompany.TabIndex = 117;
+            this.txtCompany.TextChanged += new System.EventHandler(this.txtCompany_TextChanged);
             // 
             // bttnDelete
             // 
             this.bttnDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.bttnDelete.Font = new System.Drawing.Font("Verdana", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            this.bttnDelete.Location = new System.Drawing.Point(277, 378);
+            this.bttnDelete.Location = new System.Drawing.Point(285, 378);
             this.bttnDelete.Name = "bttnDelete";
             this.bttnDelete.Size = new System.Drawing.Size(96, 32);
             this.bttnDelete.TabIndex = 136;
@@ -450,21 +452,21 @@
             // loadCustomersToolStripMenuItem
             // 
             this.loadCustomersToolStripMenuItem.Name = "loadCustomersToolStripMenuItem";
-            this.loadCustomersToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.loadCustomersToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
             this.loadCustomersToolStripMenuItem.Text = "Load Customers";
             this.loadCustomersToolStripMenuItem.Click += new System.EventHandler(this.loadCustomersToolStripMenuItem_Click);
-            // 
-            // exitToolStripMenuItem
-            // 
-            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
-            this.exitToolStripMenuItem.Text = "Exit";
-            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(170, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(158, 6);
+            // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
+            this.exitToolStripMenuItem.Text = "Exit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // Form1
             // 

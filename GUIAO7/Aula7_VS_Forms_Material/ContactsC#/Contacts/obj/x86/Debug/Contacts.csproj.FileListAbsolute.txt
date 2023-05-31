@@ -7,3 +7,5 @@ D:\Universidade\BD\BD\GUIAO7\Aula7_VS_Forms_Material\ContactsC#\Contacts\obj\x86
 D:\Universidade\BD\BD\GUIAO7\Aula7_VS_Forms_Material\ContactsC#\Contacts\obj\x86\Debug\Contacts.csproj.CoreCompileInputs.cache
 D:\Universidade\BD\BD\GUIAO7\Aula7_VS_Forms_Material\ContactsC#\Contacts\obj\x86\Debug\Contacts.exe
 D:\Universidade\BD\BD\GUIAO7\Aula7_VS_Forms_Material\ContactsC#\Contacts\obj\x86\Debug\Contacts.pdb
+D:\Universidade\BD\BD\GUIAO7\Aula7_VS_Forms_Material\ContactsC#\Contacts\bin\Debug\Contacts.exe.config
+D:\Universidade\BD\BD\GUIAO7\Aula7_VS_Forms_Material\ContactsC#\Contacts\obj\x86\Debug\Contacts.csproj.SuggestedBindingRedirects.cache
