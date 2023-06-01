@@ -210,5 +210,10 @@ namespace GUIAO1
             textBox10.Text = veiculo.VeiculoMatricula;
             textBox11.Text = veiculo.VeiculoCapacidadeBateria;
         }
+
+        private void listBox1_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -1,4 +1,5 @@
 using System.Data;
+using System.Data.Common;
 using System.Data.SqlClient;
 using System.Windows.Forms;
 
@@ -28,12 +29,13 @@ namespace GUIAO1
 
         private void button2_Click(object sender, EventArgs e)
         {
-           // string str = getConnection();
+            // string str = getConnection();
             //MessageBox.Show(str);
+            SqlConnection CN = getConnection();
+            List<Cliente> data = getClientesContent(CN);
+            ListClients listClients = new ListClients(data, CN);
 
-            //ListClients listClients = new ListClients();
-
-           // listClients.Show();
+           listClients.Show();
 
 
         }
