@@ -49,3 +49,4 @@ D:\Universidade\BD\BD\GUIAO1\obj\Debug\net6.0-windows\GUIAO1.pdb
 D:\Universidade\BD\BD\GUIAO1\obj\Debug\net6.0-windows\GUIAO1.genruntimeconfig.cache
 D:\Universidade\BD\BD\GUIAO1\obj\Debug\net6.0-windows\ref\GUIAO1.dll
 D:\Universidade\BD\BD\GUIAO1\obj\Debug\net6.0-windows\GUIAO1.ListMotoristas.resources
+D:\Universidade\BD\BD\GUIAO1\obj\Debug\net6.0-windows\GUIAO1.Recarga.resources

@@ -30,7 +30,7 @@ namespace GUIAO1
         public String VeiculoModelo
         {
             get { return _veiculoModelo; }
-            set { _veiculoMarca = value; }
+            set { _veiculoModelo = value;}
         }
 
         public String VeiculoCor
@@ -65,6 +65,7 @@ namespace GUIAO1
             VeiculoLugares = veiculoLugares;
             VeiculoMatricula = veiculoMatricula;
             VeiculoCapacidadeBateria = veiculoCapacidadeBateria;
+            VeiculoModelo = veiculoModelo;
         }
 
         public Veiculo()

@@ -16,7 +16,7 @@ namespace GUIAO1
             SqlConnection CN = getConnection();
             List<Motorista> data = getMotoristasContent(CN);         
 
-            ListMotoristas listMotoristas = new ListMotoristas(data, CN);
+            ListMotoristas listMotoristas = new ListMotoristas(data);
             listMotoristas.Show();
 
         }

@@ -69,13 +69,7 @@ namespace GUIAO1
             MotoristaFoto = motoristaFoto;
             MotoristaAvaliacao = motoristaAvaliacao;
             MotoristaCartaConducao = motoristaCartaConducao;
-            MotoristaID = motoristaID;
-            MotoristaNome = motoristaNome;
-            MotoristaEmail = motoristaEmail;
-            MotoristaTelefone = motoristaTelefone;
-            MotoristaFoto = motoristaFoto;
-            MotoristaAvaliacao = motoristaAvaliacao;
-            MotoristaCartaConducao = motoristaCartaConducao;
+           
         }
         public Motorista()
         {

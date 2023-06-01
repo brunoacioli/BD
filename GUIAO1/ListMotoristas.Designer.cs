@@ -40,6 +40,10 @@
             label5 = new Label();
             listBox1 = new ListBox();
             panel1 = new Panel();
+            button5 = new Button();
+            button3 = new Button();
+            button2 = new Button();
+            button4 = new Button();
             listBox2 = new ListBox();
             textBox6 = new TextBox();
             label6 = new Label();
@@ -54,6 +58,11 @@
             textBox11 = new TextBox();
             label11 = new Label();
             panel2 = new Panel();
+            button9 = new Button();
+            button8 = new Button();
+            button7 = new Button();
+            button6 = new Button();
+            button1 = new Button();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             SuspendLayout();
@@ -152,6 +161,10 @@
             // panel1
             // 
             panel1.BackColor = SystemColors.ActiveBorder;
+            panel1.Controls.Add(button5);
+            panel1.Controls.Add(button3);
+            panel1.Controls.Add(button4);
+            panel1.Controls.Add(button2);
             panel1.Controls.Add(textBox5);
             panel1.Controls.Add(label5);
             panel1.Controls.Add(textBox4);
@@ -166,6 +179,45 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(489, 199);
             panel1.TabIndex = 12;
+            // 
+            // button5
+            // 
+            button5.Location = new Point(367, 136);
+            button5.Name = "button5";
+            button5.Size = new Size(92, 40);
+            button5.TabIndex = 14;
+            button5.Text = "Cancel";
+            button5.UseVisualStyleBackColor = true;
+            button5.Click += button5_Click;
+            // 
+            // button3
+            // 
+            button3.Location = new Point(367, 136);
+            button3.Name = "button3";
+            button3.Size = new Size(92, 40);
+            button3.TabIndex = 12;
+            button3.Text = "Edit";
+            button3.UseVisualStyleBackColor = true;
+            // 
+            // button2
+            // 
+            button2.Location = new Point(269, 136);
+            button2.Name = "button2";
+            button2.Size = new Size(92, 40);
+            button2.TabIndex = 11;
+            button2.Text = "Add";
+            button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
+            // 
+            // button4
+            // 
+            button4.Location = new Point(269, 136);
+            button4.Name = "button4";
+            button4.Size = new Size(92, 40);
+            button4.TabIndex = 13;
+            button4.Text = "OK";
+            button4.UseVisualStyleBackColor = true;
+            button4.Click += button4_Click;
             // 
             // listBox2
             // 
@@ -280,6 +332,10 @@
             // panel2
             // 
             panel2.BackColor = SystemColors.ActiveBorder;
+            panel2.Controls.Add(button9);
+            panel2.Controls.Add(button8);
+            panel2.Controls.Add(button7);
+            panel2.Controls.Add(button6);
             panel2.Controls.Add(textBox10);
             panel2.Controls.Add(label10);
             panel2.Controls.Add(textBox11);
@@ -298,11 +354,61 @@
             panel2.Size = new Size(489, 229);
             panel2.TabIndex = 26;
             // 
+            // button9
+            // 
+            button9.Location = new Point(223, 205);
+            button9.Name = "button9";
+            button9.Size = new Size(92, 40);
+            button9.TabIndex = 15;
+            button9.Text = "OK";
+            button9.UseVisualStyleBackColor = true;
+            button9.Click += button9_Click;
+            // 
+            // button8
+            // 
+            button8.Location = new Point(378, 205);
+            button8.Name = "button8";
+            button8.Size = new Size(92, 40);
+            button8.TabIndex = 15;
+            button8.Text = "Cancel";
+            button8.UseVisualStyleBackColor = true;
+            // 
+            // button7
+            // 
+            button7.Location = new Point(378, 171);
+            button7.Name = "button7";
+            button7.Size = new Size(92, 40);
+            button7.TabIndex = 27;
+            button7.Text = "Edit";
+            button7.UseVisualStyleBackColor = true;
+            button7.Click += button7_Click;
+            // 
+            // button6
+            // 
+            button6.Location = new Point(223, 171);
+            button6.Name = "button6";
+            button6.Size = new Size(92, 40);
+            button6.TabIndex = 26;
+            button6.Text = "Add";
+            button6.UseVisualStyleBackColor = true;
+            button6.Click += button6_Click;
+            // 
+            // button1
+            // 
+            button1.Location = new Point(286, 452);
+            button1.Name = "button1";
+            button1.Size = new Size(106, 43);
+            button1.TabIndex = 27;
+            button1.Text = "Pontos de Descanso";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
+            // 
             // ListMotoristas
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 507);
+            ClientSize = new Size(800, 516);
+            Controls.Add(button1);
             Controls.Add(panel2);
             Controls.Add(panel1);
             Controls.Add(listBox1);
@@ -343,5 +449,14 @@
         private TextBox textBox11;
         private Label label11;
         private Panel panel2;
+        private Button button1;
+        private Button button2;
+        private Button button5;
+        private Button button4;
+        private Button button3;
+        private Button button7;
+        private Button button6;
+        private Button button8;
+        private Button button9;
     }
 }

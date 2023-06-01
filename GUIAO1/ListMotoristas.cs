@@ -3,33 +3,36 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Text;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace GUIAO1
 {
     public partial class ListMotoristas : Form
     {
         private List<Motorista> _motoristaList;
-        private SqlConnection _connection;
+
         private int currentMotorista;
         private int currentVeiculo;
-        private int aux = 0;
-        private List<Veiculo> veiculosList ;
+        private bool adding;
+        private bool addingVeiculo;
+
         public ListMotoristas()
         {
 
             InitializeComponent();
         }
 
-        public ListMotoristas(List<Motorista> motoraList, SqlConnection cn)
+        public ListMotoristas(List<Motorista> motoraList)
         {
             MotoristaList = motoraList;
-            Connection = cn;
+
             InitializeComponent();
         }
 
@@ -39,11 +42,7 @@ namespace GUIAO1
             set { _motoristaList = value; }
         }
 
-        public SqlConnection Connection
-        {
-            get { return _connection; }
-            set { _connection = value; }
-        }
+
 
         private void label1_Click(object sender, EventArgs e)
         {
@@ -60,6 +59,14 @@ namespace GUIAO1
             }
             LockMotoristaControls();
             LockVeiculosControls();
+            button4.Visible = false;
+            button5.Visible = false;
+            button6.Enabled = false;
+            button7.Enabled = false;
+            button8.Visible = false;
+            button9.Visible = false;
+
+
         }
 
         private void textBox5_TextChanged(object sender, EventArgs e)
@@ -67,15 +74,28 @@ namespace GUIAO1
 
         }
 
+
+
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (listBox1.SelectedIndex >= 0)
             {
+                listBox2.Items.Clear();
+                button6.Enabled = true;
+                button7.Enabled = true;
                 currentMotorista = listBox1.SelectedIndex;
                 ShowMotoristas();
                 Motorista m = new Motorista();
                 m = (Motorista)listBox1.SelectedItem;
-                getMotoristaVeiculoContent(Connection, m.MotoristaID);
+                SqlConnection Connection = getConnection();
+                _ = new List<Veiculo>();
+                List<Veiculo> veiculosList = getMotoristaVeiculoContent(Connection, m.MotoristaID);
+
+                foreach (Veiculo v in veiculosList)
+                {
+                    listBox2.Items.Add(v);
+                }
+
 
             }
         }
@@ -130,31 +150,39 @@ namespace GUIAO1
             textBox11.ReadOnly = false;
         }
 
-        private void getMotoristaVeiculoContent(SqlConnection CN, String id)
+
+
+        private List<Veiculo> getMotoristaVeiculoContent(SqlConnection CN, String id)
         {
-          
+            List<Veiculo> veiculosList = new List<Veiculo>();
             try
             {
-                
+                CN.Open();
+
                 if (CN.State == ConnectionState.Open)
                 {
 
-                    SqlCommand sqlcmd = new SqlCommand("EXEC sp_Motorista_Veiculos " + id, CN);
+                    string query = "EXEC sp_Motorista_Veiculos " + id;
+                    SqlCommand sqlcmd = new SqlCommand(query, CN);
                     SqlDataReader reader;
                     reader = sqlcmd.ExecuteReader();
+
 
                     while (reader.Read())
                     {
                         Veiculo V = new Veiculo();
 
                         V.VeiculoID = reader.GetInt32(reader.GetOrdinal("id")).ToString();
-                        V.VeiculoMarca = reader.GetString(reader.GetOrdinal("marcar"));
+                        V.VeiculoMarca = reader.GetString(reader.GetOrdinal("marca"));
                         V.VeiculoModelo = reader.GetString(reader.GetOrdinal("modelo"));
                         V.VeiculoCor = reader.GetString(reader.GetOrdinal("cor"));
                         V.VeiculoLugares = reader.GetInt32(reader.GetOrdinal("lugares")).ToString();
                         V.VeiculoMatricula = reader.GetString(reader.GetOrdinal("matricula"));
                         V.VeiculoCapacidadeBateria = reader.GetInt32(reader.GetOrdinal("capacidade_bateria")).ToString();
+                        Debug.WriteLine(V.VeiculoModelo);
                         veiculosList.Add(V);
+
+
 
                     }
                 }
@@ -166,7 +194,8 @@ namespace GUIAO1
 
             if (CN.State == ConnectionState.Open)
                 CN.Close();
-           
+
+            return veiculosList;
         }
 
         private void label6_Click(object sender, EventArgs e)
@@ -192,8 +221,9 @@ namespace GUIAO1
             if (listBox2.SelectedIndex >= 0)
             {
                 currentVeiculo = listBox2.SelectedIndex;
+
                 ShowVeiculos();
-                             
+
             }
         }
 
@@ -207,8 +237,167 @@ namespace GUIAO1
             textBox7.Text = veiculo.VeiculoModelo;
             textBox8.Text = veiculo.VeiculoCor;
             textBox9.Text = veiculo.VeiculoLugares;
-            textBox10.Text = veiculo.VeiculoMatricula;
-            textBox11.Text = veiculo.VeiculoCapacidadeBateria;
+            textBox11.Text = veiculo.VeiculoMatricula;
+            textBox10.Text = veiculo.VeiculoCapacidadeBateria;
+        }
+
+        private SqlConnection getConnection()
+        {
+            SqlConnection CN = new SqlConnection("Data Source = " + "tcp:mednat.ieeta.pt\\SQLSERVER,8101" + " ;" + "Initial Catalog = " + "p10g2" +
+                                                       "; uid = " + "p10g2" + ";" + "password = " + "@Osmarfrango1");
+
+            return CN;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Recarga recarga = new Recarga();
+            recarga.Show();
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            clearFields();
+            UnlockMotoristaControls();
+            button2.Visible = false;
+            button3.Visible = false;
+            button4.Visible = true;
+            button5.Visible = true;
+            listBox1.Enabled = false;
+            adding = true;
+
+        }
+
+        public void clearFields()
+        {
+            textBox1.Text = "";
+            textBox2.Text = "";
+            textBox3.Text = "";
+            textBox4.Text = "";
+            textBox5.Text = "";
+
+        }
+
+        public bool createMotorista()
+        {
+            Motorista motora = new Motorista();
+            try
+            {
+                motora.MotoristaNome = textBox1.Text;
+                motora.MotoristaEmail = textBox2.Text;
+                motora.MotoristaAvaliacao = textBox3.Text;
+                motora.MotoristaTelefone = textBox4.Text;
+                motora.MotoristaCartaConducao = textBox5.Text;
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return false;
+            }
+
+            if (adding)
+            {
+                setMotorista(getConnection(), motora);
+                listBox1.Items.Add(motora);
+            }
+            else
+            {
+                //update motorista
+            }
+
+            return true;
+        }
+
+        private void setMotorista(SqlConnection CN, Motorista motora)
+        {
+            CN.Open();
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandText = "INSERT  Pessoas(nome, email, foto, avaliacao, telefone, carta_conducao) values(@nome, @email, @foto, @avaliacao, @telefone, @carta_conducao );";
+            cmd.Parameters.Clear();
+            cmd.Parameters.AddWithValue("@nome", motora.MotoristaNome);
+            cmd.Parameters.AddWithValue("@email", motora.MotoristaEmail);
+            cmd.Parameters.AddWithValue("@foto", motora.MotoristaNome + ".jpg");
+            cmd.Parameters.AddWithValue("@avaliacao", motora.MotoristaAvaliacao);
+            cmd.Parameters.AddWithValue("@telefone", motora.MotoristaTelefone);
+            cmd.Parameters.AddWithValue("@carta_conducao", motora.MotoristaCartaConducao);
+            cmd.Connection = CN;
+
+            try
+            {
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Failed to update contact in database. \n ERROR MESSAGE: \n" + ex.Message);
+            }
+            finally
+            {
+                CN.Close();
+            }
+
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+
+            try
+            {
+                createMotorista();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+            button4.Visible = false;
+            button5.Visible = false;
+            clearFields();
+            listBox1.Enabled = true;
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            button4.Visible = false;
+            button5.Visible = false;
+            clearFields();
+            listBox1.Enabled = true;
+            adding = false;
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            clearVeiculosFields();
+            UnlockVeiculosControls();
+            button6.Visible = false;
+            button7.Visible = false;
+            button8.Visible = true;
+            button9.Visible = true;
+            listBox1.Enabled = false;
+            addingVeiculo = true;
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        public void clearVeiculosFields()
+        {
+            textBox6.Text = "";
+            textBox7.Text = "";
+            textBox8.Text = "";
+            textBox9.Text = "";
+            textBox10.Text = "";
+            textBox11.Text = "";
+
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+
+           
         }
     }
 }
