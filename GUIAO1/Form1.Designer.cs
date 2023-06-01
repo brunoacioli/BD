@@ -139,6 +139,44 @@ namespace GUIAO1
                 CN.Close();
             return motoraList;
         }
+
+        private List<Cliente> getClientesContent(SqlConnection CN)
+        {
+            List<Cliente> clientesList = new List<Cliente>();
+
+            try
+            {
+                CN.Open();
+                if (CN.State == ConnectionState.Open)
+                {
+                    
+                    SqlCommand sqlcmd = new SqlCommand("SELECT * FROM Pessoas WHERE carta_conducao IS NULL", CN);
+                    SqlDataReader reader;
+                    reader = sqlcmd.ExecuteReader();
+                    
+                    while (reader.Read())
+                    {
+                        Cliente C = new Cliente();
+                        C.ClienteID = reader.GetInt32(reader.GetOrdinal("id")).ToString();
+                        C.ClienteNome = reader.GetString(reader.GetOrdinal("nome")) ;
+                        C.ClienteEmail = reader.GetString(reader.GetOrdinal("email"));
+                        C.ClienteFoto = reader.GetString(reader.GetOrdinal("foto"));
+                        C.ClienteAvaliacao = reader.GetDouble(reader.GetOrdinal("avaliacao")).ToString();
+                        C.ClienteTelefone = reader.GetInt32(reader.GetOrdinal("telefone")).ToString();
+                        clientesList.Add(C);
+                        
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Failed to open connection to database due to the error \r\n" + ex.Message, "Connection Error", MessageBoxButtons.OK);
+            }
+
+            if (CN.State == ConnectionState.Open)
+                CN.Close();
+            return clientesList;
+        }
         
 
         private SqlConnection getConnection()

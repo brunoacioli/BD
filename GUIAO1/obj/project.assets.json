@@ -470,19 +470,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\marco\\.nuget\\packages\\": {}
+    "C:\\Users\\administrator\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Universidade\\BD\\BD\\GUIAO1\\GUIAO1.csproj",
+      "projectUniqueName": "C:\\BD\\GUIAO1\\GUIAO1.csproj",
       "projectName": "GUIAO1",
-      "projectPath": "D:\\Universidade\\BD\\BD\\GUIAO1\\GUIAO1.csproj",
-      "packagesPath": "C:\\Users\\marco\\.nuget\\packages\\",
-      "outputPath": "D:\\Universidade\\BD\\BD\\GUIAO1\\obj\\",
+      "projectPath": "C:\\BD\\GUIAO1\\GUIAO1.csproj",
+      "packagesPath": "C:\\Users\\administrator\\.nuget\\packages\\",
+      "outputPath": "C:\\BD\\GUIAO1\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\marco\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -532,7 +532,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.302\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
       }
     }
   }
