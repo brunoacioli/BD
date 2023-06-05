@@ -52,3 +52,4 @@ D:\Universidade\BD\BD\GUIAO1\obj\Debug\net6.0-windows\GUIAO1.ListMotoristas.reso
 D:\Universidade\BD\BD\GUIAO1\obj\Debug\net6.0-windows\GUIAO1.Recarga.resources
 C:\BD\GUIAO1\obj\Debug\net6.0-windows\GUIAO1.ListMotoristas.resources
 C:\BD\GUIAO1\obj\Debug\net6.0-windows\GUIAO1.ListCorridas.resources
+D:\Universidade\BD\BD\GUIAO1\obj\Debug\net6.0-windows\GUIAO1.ListCorridas.resources

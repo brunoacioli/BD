@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ToolBar;
 
 namespace GUIAO1
 {
@@ -59,12 +60,12 @@ namespace GUIAO1
             }
             LockMotoristaControls();
             LockVeiculosControls();
-            button4.Visible = false;
-            button5.Visible = false;
-            button6.Enabled = false;
-            button7.Enabled = false;
-            button8.Visible = false;
-            button9.Visible = false;
+            motoristaOkButton.Visible = false;
+            motoristaCancelButton.Visible = false;
+            veiculoAddButton.Enabled = false;
+            veiculoEditButton.Enabled = false;
+            veiculoCancelButton.Visible = false;
+            veiculoOkButton.Visible = false;
 
 
         }
@@ -78,11 +79,14 @@ namespace GUIAO1
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
+            Debug.WriteLine("fora");
             if (listBox1.SelectedIndex >= 0)
             {
+                Debug.WriteLine("dentro");
                 listBox2.Items.Clear();
-                button6.Enabled = true;
-                button7.Enabled = true;
+                clearVeiculosFields();
+                veiculoAddButton.Enabled = true;
+                veiculoEditButton.Enabled = true;
                 currentMotorista = listBox1.SelectedIndex;
                 ShowMotoristas();
                 Motorista m = new Motorista();
@@ -102,6 +106,7 @@ namespace GUIAO1
 
         public void ShowMotoristas()
         {
+            Debug.WriteLine("Aaaaaaaaaaaa");
             if (listBox1.Items.Count == 0 | currentMotorista < 0)
                 return;
             Motorista motora = new Motorista();
@@ -256,18 +261,7 @@ namespace GUIAO1
 
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            clearFields();
-            UnlockMotoristaControls();
-            button2.Visible = false;
-            button3.Visible = false;
-            button4.Visible = true;
-            button5.Visible = true;
-            listBox1.Enabled = false;
-            adding = true;
 
-        }
 
         public void clearFields()
         {
@@ -314,7 +308,7 @@ namespace GUIAO1
         {
             CN.Open();
             SqlCommand cmd = new SqlCommand();
-            cmd.CommandText = "INSERT  Pessoas(nome, email, foto, avaliacao, telefone, carta_conducao) values(@nome, @email, @foto, @avaliacao, @telefone, @carta_conducao );";
+            cmd.CommandText = "EXEC insertNewPessoa @nome, @email, @foto, @avaliacao, @telefone, @carta_conducao ;";
             cmd.Parameters.Clear();
             cmd.Parameters.AddWithValue("@nome", motora.MotoristaNome);
             cmd.Parameters.AddWithValue("@email", motora.MotoristaEmail);
@@ -339,49 +333,13 @@ namespace GUIAO1
 
         }
 
-        private void button4_Click(object sender, EventArgs e)
-        {
 
-            try
-            {
-                createMotorista();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
 
-            button4.Visible = false;
-            button5.Visible = false;
-            clearFields();
-            listBox1.Enabled = true;
-        }
 
-        private void button5_Click(object sender, EventArgs e)
-        {
-            button4.Visible = false;
-            button5.Visible = false;
-            clearFields();
-            listBox1.Enabled = true;
-            adding = false;
-        }
 
-        private void button6_Click(object sender, EventArgs e)
-        {
-            clearVeiculosFields();
-            UnlockVeiculosControls();
-            button6.Visible = false;
-            button7.Visible = false;
-            button8.Visible = true;
-            button9.Visible = true;
-            listBox1.Enabled = false;
-            addingVeiculo = true;
-        }
 
-        private void button7_Click(object sender, EventArgs e)
-        {
 
-        }
+
 
         public void clearVeiculosFields()
         {
@@ -394,13 +352,162 @@ namespace GUIAO1
 
         }
 
-        private void button9_Click(object sender, EventArgs e)
+
+
+        public Boolean createVeiculo()
+        {
+            Veiculo veiculo = new Veiculo();
+            try
+            {
+                veiculo.VeiculoMarca = textBox6.Text;
+                veiculo.VeiculoModelo = textBox7.Text;
+                veiculo.VeiculoCor = textBox8.Text;
+                veiculo.VeiculoLugares = textBox9.Text;
+                veiculo.VeiculoCapacidadeBateria = textBox11.Text;
+                veiculo.VeiculoMatricula = textBox10.Text;
+                currentMotorista = listBox1.SelectedIndex;
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return false;
+            }
+
+            if (addingVeiculo)
+            {
+                setVeiculo(getConnection(), veiculo,currentMotorista);
+                listBox2.Items.Add(veiculo);
+            }
+            else
+            {
+                //update motorista
+            }
+
+            return true;
+        }
+
+        public void setVeiculo(SqlConnection CN, Veiculo veiculo, int motorista_cliente)
         {
 
-           
         }
 
         private void listBox1_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void listBox1_SelectedIndexChanged_2(object sender, EventArgs e)
+        {
+            Debug.WriteLine("fora");
+            if (listBox1.SelectedIndex >= 0)
+            {
+                Debug.WriteLine("dentro");
+                listBox2.Items.Clear();
+                clearVeiculosFields();
+                veiculoAddButton.Enabled = true;
+                veiculoEditButton.Enabled = true;
+                currentMotorista = listBox1.SelectedIndex;
+                ShowMotoristas();
+                Motorista m = new Motorista();
+                m = (Motorista)listBox1.SelectedItem;
+                SqlConnection Connection = getConnection();
+                _ = new List<Veiculo>();
+                List<Veiculo> veiculosList = getMotoristaVeiculoContent(Connection, m.MotoristaID);
+
+                foreach (Veiculo v in veiculosList)
+                {
+                    listBox2.Items.Add(v);
+                }
+
+
+            }
+        }
+
+        private void listBox2_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+            if (listBox2.SelectedIndex >= 0)
+            {
+                currentVeiculo = listBox2.SelectedIndex;
+
+                ShowVeiculos();
+
+            }
+        }
+
+        private void motoristaOkButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                createMotorista();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+            motoristaOkButton.Visible = false;
+            motoristaCancelButton.Visible = false;
+            clearFields();
+            listBox1.Enabled = true;
+        }
+
+        private void motoristaAddButton_Click(object sender, EventArgs e)
+        {
+            clearFields();
+            UnlockMotoristaControls();
+            motoristaAddButton.Visible = false;
+            button3.Visible = false;
+            motoristaOkButton.Visible = true;
+            motoristaCancelButton.Visible = true;
+            listBox1.Enabled = false;
+            listBox2.Enabled = false;
+            listBox2.Items.Clear();
+            adding = true;
+        }
+
+        private void motoristaCancelButton_Click(object sender, EventArgs e)
+        {
+            motoristaOkButton.Visible = false;
+            motoristaCancelButton.Visible = false;
+            clearFields();
+            LockMotoristaControls();
+            listBox1.Enabled = true;
+            adding = false;
+        }
+
+
+
+        private void veiculoOkButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                createVeiculo();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+            veiculoOkButton.Visible = false;
+            veiculoCancelButton.Visible = false;
+            clearFields();
+            listBox2.Enabled = true;
+        }
+
+        private void veiculoAddButton_Click(object sender, EventArgs e)
+        {
+            clearVeiculosFields();
+            UnlockVeiculosControls();
+            veiculoAddButton.Visible = false;
+            veiculoEditButton.Visible = false;
+            veiculoCancelButton.Visible = true;
+            veiculoOkButton.Visible = true;
+            listBox1.Enabled = false;
+            addingVeiculo = true;
+        }
+
+        private void veiculoCancelButton_Click(object sender, EventArgs e)
         {
 
         }

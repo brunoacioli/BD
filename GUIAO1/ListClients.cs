@@ -19,13 +19,14 @@ namespace GUIAO1
         Cliente cliente;
         private SqlConnection _connection;
         private int clientIndex;
-         
+
         public ListClients()
         {
             InitializeComponent();
         }
 
-        public ListClients(List<Cliente> clientesList, SqlConnection cn) {
+        public ListClients(List<Cliente> clientesList, SqlConnection cn)
+        {
             ClientesList = clientesList;
             Connection = cn;
             InitializeComponent();
@@ -36,7 +37,7 @@ namespace GUIAO1
         {
             get { return _clientesList; }
             set { _clientesList = value; }
-        } 
+        }
 
         public SqlConnection Connection
         {
@@ -58,7 +59,8 @@ namespace GUIAO1
         {
             button1.Visible = false;
 
-            if (listBox1.SelectedIndex >= 0 ) {
+            if (listBox1.SelectedIndex >= 0)
+            {
                 clientIndex = listBox1.SelectedIndex;
                 showClientes();
                 button1.Visible = true;
@@ -102,7 +104,8 @@ namespace GUIAO1
 
         }
 
-        public void showClientes() {
+        public void showClientes()
+        {
             if (listBox1.Items.Count == 0 | clientIndex < 0)
                 return;
             cliente = (Cliente)listBox1.SelectedItem;
@@ -121,7 +124,7 @@ namespace GUIAO1
             Debug.WriteLine("#######");
             Debug.WriteLine(corridasList.Count);
 
-            ListCorridas corridas = new ListCorridas(corridasList,cliente.ClienteID);
+            ListCorridas corridas = new ListCorridas(corridasList, cliente.ClienteID);
             corridas.Show();
         }
 
@@ -149,8 +152,8 @@ namespace GUIAO1
                         //C.inicio = reader.GetString(reader.GetOrdinal("inicio"));
                         //C.fim = reader.GetString(reader.GetOrdinal("fim")).ToString();
                         C.duracao = reader.IsDBNull(reader.GetOrdinal("duracao")) ? null : reader.GetString(reader.GetOrdinal("duracao")).ToString();
-                        C.pagamento = reader.IsDBNull(reader.GetOrdinal("pagamento")) ? null : reader.GetDecimal(reader.GetOrdinal("pagamento")).ToString().Substring(0,4);
-                        C.gorjeta = reader.IsDBNull(reader.GetOrdinal("gorjeta")) ? null :reader.GetDecimal(reader.GetOrdinal("gorjeta")).ToString().Substring(0,4);
+                        C.pagamento = reader.IsDBNull(reader.GetOrdinal("pagamento")) ? null : reader.GetDecimal(reader.GetOrdinal("pagamento")).ToString().Substring(0, 4);
+                        C.gorjeta = reader.IsDBNull(reader.GetOrdinal("gorjeta")) ? null : reader.GetDecimal(reader.GetOrdinal("gorjeta")).ToString().Substring(0, 4);
                         C.id_cliente = reader.GetInt32(reader.GetOrdinal("id_cliente")).ToString();
                         C.id_motorista = reader.GetInt32(reader.GetOrdinal("id_motorista")).ToString();
                         corridasList.Add(C);

@@ -111,7 +111,7 @@ namespace GUIAO1
                 if (CN.State == ConnectionState.Open)
                 {
                     
-                    SqlCommand sqlcmd = new SqlCommand("SELECT * FROM Pessoas WHERE carta_conducao IS NOT NULL", CN);
+                    SqlCommand sqlcmd = new SqlCommand("EXEC listMotoristas", CN);
                     SqlDataReader reader;
                     reader = sqlcmd.ExecuteReader();
                     

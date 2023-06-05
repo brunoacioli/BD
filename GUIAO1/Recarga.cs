@@ -254,6 +254,7 @@ namespace GUIAO1
         {
             if (listBox2.SelectedIndex >= 0)
             {
+                listBox3.Items.Clear();
                 currentDescanso = listBox2.SelectedIndex;
                 ShowDescansos();
 
