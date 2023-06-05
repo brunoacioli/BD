@@ -357,15 +357,18 @@ namespace GUIAO1
         public Boolean createVeiculo()
         {
             Veiculo veiculo = new Veiculo();
+            Motorista currentMotorista = (Motorista)listBox1.SelectedItem;
+            String motorista_id = currentMotorista.MotoristaID;
+
             try
             {
                 veiculo.VeiculoMarca = textBox6.Text;
                 veiculo.VeiculoModelo = textBox7.Text;
                 veiculo.VeiculoCor = textBox8.Text;
                 veiculo.VeiculoLugares = textBox9.Text;
-                veiculo.VeiculoCapacidadeBateria = textBox11.Text;
-                veiculo.VeiculoMatricula = textBox10.Text;
-                currentMotorista = listBox1.SelectedIndex;
+                veiculo.VeiculoCapacidadeBateria = textBox10.Text;
+                veiculo.VeiculoMatricula = textBox11.Text;
+
 
             }
             catch (Exception ex)
@@ -376,7 +379,7 @@ namespace GUIAO1
 
             if (addingVeiculo)
             {
-                setVeiculo(getConnection(), veiculo,currentMotorista);
+                setVeiculo(getConnection(), veiculo, motorista_id);
                 listBox2.Items.Add(veiculo);
             }
             else
@@ -387,9 +390,39 @@ namespace GUIAO1
             return true;
         }
 
-        public void setVeiculo(SqlConnection CN, Veiculo veiculo, int motorista_cliente)
+        public void setVeiculo(SqlConnection CN, Veiculo veiculo, String motorista_id)
         {
+            CN.Open();
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandText = "EXEC insertVeiculo  @id_motorista, @marca, @modelo, @cor, @lugares, @matricula, @capacidade_bateria ;";
 
+            cmd.Parameters.Clear();
+            cmd.Parameters.AddWithValue("@marca", veiculo.VeiculoMarca);
+            cmd.Parameters.AddWithValue("@modelo", veiculo.VeiculoModelo);
+            cmd.Parameters.AddWithValue("@cor", veiculo.VeiculoCor);
+            cmd.Parameters.AddWithValue("@lugares", veiculo.VeiculoLugares);
+            cmd.Parameters.AddWithValue("@matricula", veiculo.VeiculoMatricula);
+            cmd.Parameters.AddWithValue("@capacidade_bateria", veiculo.VeiculoCapacidadeBateria);
+            cmd.Parameters.AddWithValue("@id_motorista", motorista_id);
+
+            Debug.WriteLine(cmd.ToString());
+
+            cmd.Connection = CN;
+
+            try
+            {
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+
+                Debug.WriteLine(ex.Message + " " + ex.Source + " " + ex.StackTrace);
+                throw new Exception("Failed to update contact in database. \n ERROR MESSAGE: \n" + ex.Message + " " + ex.Source + " " + ex.StackTrace);
+            }
+            finally
+            {
+                CN.Close();
+            }
         }
 
         private void listBox1_SelectedIndexChanged_1(object sender, EventArgs e)
@@ -457,7 +490,7 @@ namespace GUIAO1
             clearFields();
             UnlockMotoristaControls();
             motoristaAddButton.Visible = false;
-            button3.Visible = false;
+            motoristaEditButton.Visible = false;
             motoristaOkButton.Visible = true;
             motoristaCancelButton.Visible = true;
             listBox1.Enabled = false;
@@ -470,6 +503,10 @@ namespace GUIAO1
         {
             motoristaOkButton.Visible = false;
             motoristaCancelButton.Visible = false;
+            motoristaAddButton.Visible = true;
+            motoristaEditButton.Visible=true;
+
+
             clearFields();
             LockMotoristaControls();
             listBox1.Enabled = true;
@@ -489,8 +526,10 @@ namespace GUIAO1
                 MessageBox.Show(ex.Message);
             }
 
-            veiculoOkButton.Visible = false;
+            veiculoAddButton.Visible = true;
             veiculoCancelButton.Visible = false;
+            veiculoOkButton.Visible = false;
+            veiculoEditButton.Visible = true;
             clearFields();
             listBox2.Enabled = true;
         }
@@ -508,6 +547,16 @@ namespace GUIAO1
         }
 
         private void veiculoCancelButton_Click(object sender, EventArgs e)
+        {
+            veiculoAddButton.Visible = true;
+            veiculoCancelButton.Visible = false;
+            veiculoOkButton.Visible = false;
+            veiculoEditButton.Visible = true;
+
+
+        }
+
+        private void motoristaEditButton_Click(object sender, EventArgs e)
         {
 
         }

@@ -39,7 +39,7 @@
             textBox5 = new TextBox();
             label5 = new Label();
             panel1 = new Panel();
-            button3 = new Button();
+            motoristaEditButton = new Button();
             motoristaCancelButton = new Button();
             motoristaOkButton = new Button();
             motoristaAddButton = new Button();
@@ -57,10 +57,10 @@
             textBox11 = new TextBox();
             label11 = new Label();
             panel2 = new Panel();
+            veiculoOkButton = new Button();
             veiculoCancelButton = new Button();
             veiculoEditButton = new Button();
             veiculoAddButton = new Button();
-            veiculoOkButton = new Button();
             button1 = new Button();
             listBox1 = new ListBox();
             panel1.SuspendLayout();
@@ -150,7 +150,7 @@
             // panel1
             // 
             panel1.BackColor = SystemColors.ActiveBorder;
-            panel1.Controls.Add(button3);
+            panel1.Controls.Add(motoristaEditButton);
             panel1.Controls.Add(textBox5);
             panel1.Controls.Add(label5);
             panel1.Controls.Add(textBox4);
@@ -166,14 +166,15 @@
             panel1.Size = new Size(489, 199);
             panel1.TabIndex = 12;
             // 
-            // button3
+            // motoristaEditButton
             // 
-            button3.Location = new Point(367, 136);
-            button3.Name = "button3";
-            button3.Size = new Size(92, 40);
-            button3.TabIndex = 12;
-            button3.Text = "Edit";
-            button3.UseVisualStyleBackColor = true;
+            motoristaEditButton.Location = new Point(367, 136);
+            motoristaEditButton.Name = "motoristaEditButton";
+            motoristaEditButton.Size = new Size(92, 40);
+            motoristaEditButton.TabIndex = 12;
+            motoristaEditButton.Text = "Edit";
+            motoristaEditButton.UseVisualStyleBackColor = true;
+            motoristaEditButton.Click += motoristaEditButton_Click;
             // 
             // motoristaCancelButton
             // 
@@ -336,6 +337,16 @@
             panel2.Size = new Size(489, 219);
             panel2.TabIndex = 26;
             // 
+            // veiculoOkButton
+            // 
+            veiculoOkButton.Location = new Point(223, 171);
+            veiculoOkButton.Name = "veiculoOkButton";
+            veiculoOkButton.Size = new Size(92, 40);
+            veiculoOkButton.TabIndex = 15;
+            veiculoOkButton.Text = "OK";
+            veiculoOkButton.UseVisualStyleBackColor = true;
+            veiculoOkButton.Click += veiculoOkButton_Click;
+            // 
             // veiculoCancelButton
             // 
             veiculoCancelButton.Location = new Point(378, 171);
@@ -364,16 +375,6 @@
             veiculoAddButton.Text = "Add";
             veiculoAddButton.UseVisualStyleBackColor = true;
             veiculoAddButton.Click += veiculoAddButton_Click;
-            // 
-            // veiculoOkButton
-            // 
-            veiculoOkButton.Location = new Point(223, 171);
-            veiculoOkButton.Name = "veiculoOkButton";
-            veiculoOkButton.Size = new Size(92, 40);
-            veiculoOkButton.TabIndex = 15;
-            veiculoOkButton.Text = "OK";
-            veiculoOkButton.UseVisualStyleBackColor = true;
-            veiculoOkButton.Click += veiculoOkButton_Click;
             // 
             // button1
             // 
@@ -447,7 +448,7 @@
         private Button motoristaAddButton;
         private Button motoristaCancelButton;
         private Button motoristaOkButton;
-        private Button button3;
+        private Button motoristaEditButton;
         private Button veiculoEditButton;
         private Button veiculoAddButton;
         private Button veiculoCancelButton;
