@@ -504,7 +504,7 @@ namespace GUIAO1
             motoristaOkButton.Visible = false;
             motoristaCancelButton.Visible = false;
             motoristaAddButton.Visible = true;
-            motoristaEditButton.Visible=true;
+            motoristaEditButton.Visible = true;
 
 
             clearFields();
@@ -560,5 +560,7 @@ namespace GUIAO1
         {
 
         }
+
+        
     }
 }
